@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>For Kussh ❤️</title>
+<style>
+  /* ---------- THEMES (12 neutral palettes, text + background change) ---------- */
+  :root{ --shadow:0 12px 40px rgba(0,0,0,.12); }
+  body.theme1{ background:#fff6fb; color:#222; }
+  body.theme2{ background:#0f1720; color:#eaeff6; }
+  body.theme3{ background:#fbf7f1; color:#222; }
+  body.theme4{ background:#f7fbff; color:#123; }
+  body.theme5{ background:#f1f7f6; color:#163; }
+  body.theme6{ background:#fff8ee; color:#4e342e; }
+  body.theme7{ background:#faf1fb; color:#311b92; }
+  body.theme8{ background:#f0f8f3; color:#1b5e20; }
+  body.theme9{ background:#fff2f0; color:#3e2723; }
+  body.theme10{ background:#eaf6ff; color:#0d47a1; }
+  body.theme11{ background:#fffef5; color:#5a4300; }
+  body.theme12{ background:#f3f0ff; color:#4527a0; }
+
+  html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial; transition: background .8s ease, color .6s ease; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+  .wrap{ max-width:980px; margin:28px auto; padding:20px; display:flex; flex-direction:column; align-items:center; gap:18px; }
+
+  /* subtle white hearts border */
+  body::before{
+    content:""; pointer-events:none; position:fixed; inset:0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><text x='0' y='14' font-size='14' fill='white' opacity='0.8'>❤</text></svg>");
+    background-repeat: repeat; opacity:0.18; z-index:0;
+  }
+
+  /* top controls */
+  .topbar{ width:100%; display:flex; justify-content:space-between; align-items:center; z-index:2; }
+  .brand{ font-weight:700; font-size:18px; }
+  .controls{ display:flex; gap:10px; }
+  .btn{ background:rgba(0,0,0,0.08); border:none; padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:700; }
+
+  /* TYPEWRITER BOX (heading lines centered) */
+  .typebox{
+    width:min(820px,95%); text-align:center; padding:18px 20px; border-radius:16px;
+    border:2px solid rgba(255,255,255,0.45); background:rgba(255,255,255,0.6); box-shadow:var(--shadow); z-index:2;
+  }
+  body.theme2 .typebox{ background: rgba(12,15,20,0.45); border-color: rgba(255,255,255,0.08); }
+  .type-lines{ display:block; font-size:22px; line-height:1.4; font-weight:800; }
+  .type-lines .pink{ color:#ff4d88; }
+  .cursor{ display:inline-block; width:12px; height:24px; background:currentColor; margin-left:8px; vertical-align:middle; border-radius:4px; animation: blink 1s steps(2) infinite; }
+  @keyframes blink{ 50%{opacity:0;} }
+
+  /* kush photo */
+  .kush-wrap{ display:flex; justify-content:center; align-items:center; width:100%; }
+  .kush-card{ padding:10px; border-radius:18px; box-shadow:var(--shadow); border:3px solid rgba(255,255,255,0.7); background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.5)); }
+  body.theme2 .kush-card{ background: rgba(12,15,20,0.45); border-color: rgba(255,255,255,0.08); }
+  .kush{ width:250px; height:250px; object-fit:cover; border-radius:14px; transform-origin:center; animation: kushPulse 6s ease-in-out infinite; }
+  @keyframes kushPulse{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.06);} }
+
+  /* message card (typewriter long message) */
+  .message-card{ width:min(860px,96%); padding:18px; border-radius:16px; background:rgba(255,255,255,0.9); box-shadow:var(--shadow); text-align:left; line-height:1.7; font-size:16.5px; border:1px solid rgba(255,255,255,0.6); z-index:2; color:inherit; }
+  body.theme2 .message-card{ background: rgba(12,15,20,0.55); color:#eaeef6; border-color: rgba(255,255,255,0.06); }
+
+  /* music icon */
+  .music-icon{ position:fixed; right:18px; bottom:18px; width:56px; height:56px; border-radius:999px; display:flex; align-items:center; justify-content:center; color:#fff; background:#ff4d88; box-shadow:var(--shadow); z-index:3; display:none; }
+
+  /* Collage */
+  .collage-wrap{ width:100%; display:flex; flex-direction:column; align-items:center; gap:12px; margin-top:8px; z-index:2; }
+  .collage-title{ font-weight:800; font-size:20px; cursor:pointer; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.7); }
+
+  .grid{ width:min(760px,98%); display:grid; grid-template-columns:repeat(4,1fr); gap:12px; justify-items:center; }
+  .grid figure{ margin:0; position:relative; width:100%; border-radius:12px; overflow:hidden; transform:scale(.18); opacity:0; transition: transform .9s cubic-bezier(.2,.9,.25,1), opacity .8s; filter: grayscale(.08) saturate(1.02) contrast(1.03); display:flex; flex-direction:column; align-items:center; }
+  .grid img{ width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; transition: transform .6s ease, filter .4s; }
+  .grid figure:hover img{ transform:scale(1.06); filter: brightness(1.03) saturate(1.06); }
+
+  /* captions under photo (bold, same color) */
+  .grid figcaption{ margin-top:8px; font-weight:900; text-align:center; opacity:0; transition: opacity .45s ease; color:inherit; background:transparent; padding:4px 6px; border-radius:6px; }
+
+  /* hearts */
+  .heart{
+    position:fixed; width:20px; height:20px; background:#ff6ea3; transform:rotate(45deg); border-radius:2px; z-index:4; pointer-events:none;
+    animation: floatUp 1.6s ease-out forwards;
+  }
+  .heart:before,.heart:after{ content:""; position:absolute; width:20px; height:20px; background:inherit; border-radius:50%; }
+  .heart:before{ left:-10px; } .heart:after{ top:-10px; }
+  @keyframes floatUp{ to{ transform: translateY(-180px) rotate(45deg) scale(1.2); opacity:0; } }
+
+  /* small responsive */
+  @media (max-width:760px){
+    .grid{ grid-template-columns: repeat(2,1fr); }
+    .kush{ width:180px; height:180px; }
+  }
+</style>
+</head>
+<body class="theme1">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">💖 For Kussh</div>
+      <div class="controls">
+        <button id="themeCycle" class="btn">Change Theme</button>
+        <button id="playBtn" class="btn">Play Song</button>
+      </div>
+    </div>
+
+    <!-- Typewriter heading -->
+    <div class="typebox">
+      <div class="type-lines" id="typewriter">
+        <span id="line1"></span><br/>
+        <span id="line2"></span><br/>
+        <span id="line3"></span><br/>
+        <span id="line4"></span>
+        <span class="cursor" id="typeCursor"></span>
+      </div>
+    </div>
+
+    <!-- kush photo -->
+    <div class="kush-wrap">
+      <div class="kush-card">
+        <img src="kush.jpg" alt="Kussh" class="kush"/>
+      </div>
+    </div>
+
+    <!-- *** LONG MESSAGE (TYPEWRITER) *** -->
+    <div class="message-card" id="longMessageBox" aria-live="polite" role="article">
+      <!-- typed content will appear here -->
+    </div>
+
+    <!-- collage -->
+    <div class="collage-wrap">
+      <div class="collage-title" id="collageTitle">Bakchodi nahi rukni chahiye</div>
+      <div class="grid" id="grid">
+        <figure><img src="c1.jpg"><figcaption>Ooohhhhhh, Hiiiiii Cutieeee</figcaption></figure>
+        <figure><img src="c2.jpg"><figcaption>Hey Lover</figcaption></figure>
+        <figure><img src="c3.jpg"><figcaption>Ab mein itna bhi kuch khaas nahi</figcaption></figure>
+        <figure><img src="c4.jpg"><figcaption>Tera Smile = Mera Mood Fix</figcaption></figure>
+        <figure><img src="c5.jpg"><figcaption>Meri Coffee Partner ☕</figcaption></figure>
+        <figure><img src="c6.jpg"><figcaption>Gedi Nights Forever 🌌</figcaption></figure>
+        <figure><img src="c7.jpg"><figcaption>Cutest Drama Queen 😅</figcaption></figure>
+        <figure><img src="c8.jpg"><figcaption>My Safe Place 🤍</figcaption></figure>
+      </div>
+    </div>
+
+    <div style="font-weight:800; text-align:center; margin-top:12px;">We look perfect while Fighting… <span>Henaaa 😜</span></div>
+    <div style="margin-top:12px; padding:12px 16px; border-radius:12px; background:rgba(255,255,255,0.9); text-align:center;">I miss you here, <strong>jaldi jaldi aaja</strong>… Life feels so difficult without you here baby 💔</div>
+  </div>
+
+  <!-- audio -->
+  <audio id="song" src="perfect.mp3" preload="auto" loop></audio>
+  <div class="music-icon" id="musicIcon">♪</div>
+
+<script>
+  /* ---------------- existing behaviors kept unchanged ---------------- */
+  /* theme cycle */
+  const themes = 12; let currentTheme=1;
+  const themeBtn = document.getElementById("themeCycle");
+  themeBtn.addEventListener('click', () => {
+    currentTheme = currentTheme % themes + 1;
+    document.body.className = 'theme' + currentTheme;
+  });
+
+  /* heading typewriter (4 lines) */
+  const headingLines = [
+    "Hey Kuuushhhh,",
+    "I miss you here — I know you're working so hard there,",
+    "I want to see you growing and shining, always ahead...",
+    "Come back soon, meri duniya adhuri si lagti hai."
+  ];
+  (function typeHeading(){
+    const speed = 30;
+    let li = 0, ci = 0;
+    function step(){
+      if(li >= headingLines.length){ document.getElementById('typeCursor').style.display='none'; 
+        // after heading finishes, start typing the long message
+        setTimeout(startLongMessageTypewriter, 300);
+        return;
+      }
+      const el = document.getElementById('line'+(li+1));
+      el.textContent = headingLines[li].slice(0, ci+1);
+      ci++;
+      if(ci >= headingLines[li].length){
+        ci = 0; li++; setTimeout(step, 260);
+      } else {
+        setTimeout(step, speed + (/[,.!]/.test(headingLines[li][ci]) ? 30 : 0));
+      }
+    }
+    window.addEventListener('load', ()=> setTimeout(step, 300));
+  })();
+
+  /* Play / loop music */
+  const song = document.getElementById('song'), playBtn = document.getElementById('playBtn'), musicIcon = document.getElementById('musicIcon');
+  song.loop = true;
+  let played = false;
+  function tryPlaySongOnce(){
+    if(played) return;
+    played = true;
+    song.play().catch(()=>{}); // browsers OK because triggered by click
+    musicIcon.style.display = 'flex';
+    musicIcon.animate([{ transform:'translateY(0)' }, { transform:'translateY(-8px)' }, { transform:'translateY(0)' }], { duration:1200, iterations:Infinity });
+  }
+  playBtn.addEventListener('click', tryPlaySongOnce);
+  document.addEventListener('click', e => { if(!e.target.closest('.btn')) tryPlaySongOnce(); }, {passive:true});
+
+  /* hearts on click */
+  document.addEventListener('click', e => {
+    const ignore = e.target.closest('.btn') || e.target.closest('.collage-title');
+    if(ignore) return;
+    const h = document.createElement('div');
+    h.className = 'heart';
+    const x = e.clientX + (Math.random()*30 - 15);
+    const y = e.clientY + (Math.random()*20 - 10);
+    h.style.left = x + 'px'; h.style.top = y + 'px';
+    document.body.appendChild(h);
+    setTimeout(()=> h.remove(), 1800);
+  }, {passive:true});
+
+  /* collage reveal: 5s gap between each image; caption after 2s; change theme on each reveal */
+  const grid = document.getElementById('grid');
+  const collageTitle = document.getElementById('collageTitle');
+  (function initGrid(){
+    const figs = grid.querySelectorAll('figure');
+    figs.forEach((f, idx) => { f.dataset.i = idx; f.style.transform = 'scale(.18)'; f.style.opacity = '0'; const cap = f.querySelector('figcaption'); if(cap) cap.style.opacity = '0'; });
+  })();
+  collageTitle.addEventListener('click', () => {
+    const figs = Array.from(grid.querySelectorAll('figure'));
+    // reset
+    figs.forEach(f => { f.style.opacity='0'; f.style.transform='scale(.18)'; const c=f.querySelector('figcaption'); if(c) c.style.opacity=0; });
+    figs.forEach((f, idx) => {
+      const delay = idx * 5000; // 5s gap
+      setTimeout(()=>{
+        // cycle theme when each photo shows
+        currentTheme = currentTheme % themes + 1;
+        document.body.className = 'theme' + currentTheme;
+        f.style.transition = 'transform 1s cubic-bezier(.2,.9,.25,1), opacity .8s';
+        f.style.opacity = '1';
+        f.style.transform = 'scale(1.06)';
+        setTimeout(()=> { f.style.transform = 'scale(1)'; }, 700);
+        const cap = f.querySelector('figcaption');
+        if(cap){ setTimeout(()=> cap.style.opacity = '1', 2000); }
+      }, delay);
+    });
+  });
+  // space also triggers collage
+  document.addEventListener('keydown', e => { if(e.code === 'Space'){ e.preventDefault(); collageTitle.click(); } });
+
+  /* ----------------- LONG MESSAGE TYPEWRITER ----------------- */
+  const longMessageBox = document.getElementById('longMessageBox');
+
+  // Break the long message into paragraphs for better line breaks during typewriting
+  const longParagraphs = [
+`I still remember the day I first met you… I didn’t know anything about you back then, not even what place you’d hold in my life 💭💖. Slowly, we started meeting more often, and from strangers we became friends, then good friends, and eventually something so much more special 💕.`,
+
+`Going to your place always felt like comfort to me 🏡✨. I remember staying over whenever there was a light cut at my home, eating junk food together 🍟🍕, fighting over silly things 😅, and then you saying “I’ll only forgive you if you get me chocolates” 🍫. I’d shout at you, but somehow you always fixed things between us and never let me stay upset 🤗.`,
+
+`Then came the little things that meant everything — you dropping me home every day 🚗, those cute little food dates 🍜, coffee dates ☕, teasing each other, sharing frustrations 😤, and still holding each other’s back no matter what 🤝. With you around, I always felt, “haan, ye hai toh sab sambhal lega” 💫.`,
+
+`Looking into your eyes whenever you were around became my favorite thing to do 👀❤️. Cooking your favorite food daily just to see you smile became my habit 🍲☺️. Our late-night gedi’s 🚶‍♀️🌌, watching movies together 🎬, hugging you tight 🤗 — all of it became my safe place.`,
+
+`One of the most special memories will always be our Vrindavan trip 🌸🙏. That moment when you softly said, “your jhumkas look pretty” 💎… I don’t know why, but it’s still etched in my heart forever.`,
+
+`The day you left… I cried so much. That fear of sending you away from me still doesn’t leave. Even now, I miss you every second ⏳, you’re always in my heart and my thoughts 💭❤️. Sometimes I don’t even know if what I feel is love or something else, but I do know that I miss you a lot, Kush.`,
+
+`I adore everything about you — your curly hair that I love playing with 💆‍♀️, doing champi on your head, hugging you and falling asleep in your arms 😌🤍. These little things mean the world to me, and I know this feeling will never change 🌙✨.`,
+
+`You’re my cutie, my comfort, my person 💕. And no matter the distance, my heart will always carry you with me 🤍.`
+  ];
+
+  // list of words to highlight (made bold after typing finishes)
+  const highlightWords = ['Kush','miss you','Vrindavan','jhumkas','curly hair','safe place','cutie','comfort','person'];
+
+  function startLongMessageTypewriter(){
+    // ensure we only run this once
+    if(longMessageBox.dataset.started) return;
+    longMessageBox.dataset.started = '1';
+    const typingSpeed = 18; // ms per character (adjust for speed)
+    let pIndex = 0;
+
+    function typeParagraph(){
+      if(pIndex >= longParagraphs.length) {
+        // after all paragraphs typed, do bold highlights
+        applyHighlights();
+        return;
+      }
+      const paragraphText = longParagraphs[pIndex];
+      const pEl = document.createElement('p');
+      longMessageBox.appendChild(pEl);
+      let c = 0;
+      function typeChar(){
+        if(c <= paragraphText.length){
+          pEl.textContent = paragraphText.slice(0, c);
+          c++;
+          // small pause after punctuation
+          const ch = paragraphText[c-1] || '';
+          const extra = /[.!?]/.test(ch) ? 60 : 0;
+          setTimeout(typeChar, typingSpeed + extra);
+        } else {
+          // paragraph finished -> short pause then next paragraph
+          pIndex++;
+          setTimeout(typeParagraph, 450);
+        }
+      }
+      typeChar();
+    }
+
+    function applyHighlights(){
+      // wrap highlight words with <strong> in each paragraph
+      const ps = longMessageBox.querySelectorAll('p');
+      ps.forEach(p => {
+        let html = p.textContent;
+        highlightWords.forEach(word => {
+          const esc = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const re = new RegExp(`\\b(${esc})\\b`, 'gi');
+          html = html.replace(re, '<strong>$1</strong>');
+        });
+        // keep line spacing by replacing two spaces with &nbsp; if needed (usually not necessary)
+        p.innerHTML = html;
+      });
+    }
+
+    typeParagraph();
+  }
+
+  /* If heading already finished (rare), start immediately */
+  // (startLongMessageTypewriter will be triggered after heading completes above)
+
+  /* Ensure collage and other interactions unchanged */
+
+</script>
+</body>
+</html>
